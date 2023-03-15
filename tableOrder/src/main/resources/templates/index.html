@@ -6,35 +6,31 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <input type="text" placeholder="보낼 메세지를 입력하세요." class="content">
-    <button type="button" value="전송" class="sendBtn" onclick="sendMsg()">전송</button>
-<div>
-    <span>메세지</span>
-    <div class="msgArea"></div>
-</div>
-</body>
-<script>
-        let socket = new WebSocket("ws://192.168.45.77:8089/websocket");
-
-        socket.onopen = function (e) {
-            console.log('open server!')
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" size="50">
+    </div>
+    <br>
+    <textarea id="messages" rows="10" cols="50"></textarea>
+    <br>
+    <input type="text" id="message" size="50">
+    <button onclick="sendMessage()">Send</button>
+    <script>
+        var socket = new WebSocket("ws://" + location.host + "/chat");
+        var username = "";
+        document.getElementById("username").onblur = function() {
+            username = document.getElementById("username").value;
         };
-
-        socket.onerror = function (e){
-            console.log(e);
+        socket.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            var messages = document.getElementById("messages");
+            messages.value += data.username + ": " + data.message + "\n";
+        };
+        function sendMessage() {
+            var message = document.getElementById("message").value;
+            socket.send(JSON.stringify({username: username, message: message}));
+            document.getElementById("message").value = "";
         }
-
-        socket.onmessage = function (e) {
-            console.log(e.data);
-            let msgArea = document.querySelector('.msgArea');
-            let newMsg = document.createElement('div');
-            newMsg.innerText=e.data;
-            msgArea.append(newMsg);
-        }
-
-        function sendMsg() {
-            let content=document.querySelector('.content').value;
-            socket.send(content);
-        }
-</script>
+    </script>
+</body>
 </html>
