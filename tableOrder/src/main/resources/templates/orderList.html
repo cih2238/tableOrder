@@ -20,16 +20,19 @@
 
         socket.onmessage = function(event) {
             var data = JSON.parse(event.data);
+            console.log(data);
             var messages = document.getElementById("messages");
-            messages.value += data.username + ": " + data.message + "\n";
+            messages.value += data.tableDate + "[" + data.tableNumber + "] " + data.message + "\n";
         };
 
+        /*
         function sendMessage() {
             var message = document.getElementById("message").value;
             var username = document.getElementById("username").value;
             socket.send(JSON.stringify({username: username, message: message}));
             document.getElementById("message").value = "";
         }
+        */
     </script>
 </body>
 </html>

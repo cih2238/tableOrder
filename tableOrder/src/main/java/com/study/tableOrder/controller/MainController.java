@@ -11,9 +11,9 @@ public class MainController {
 		return "/main";
 	}
 
-	@GetMapping("/chatView")
+	@GetMapping("/orderList")
 	public String goChat() {
-		return "/chatView";
+		return "/orderList";
 	}
 
 	@GetMapping("/order")
