@@ -17,17 +17,16 @@
     <button onclick="sendMessage()">Send</button>
     <script>
         var socket = new WebSocket("ws://" + location.host + "/chat");
-        var username = "";
-        document.getElementById("username").onblur = function() {
-            username = document.getElementById("username").value;
-        };
+
         socket.onmessage = function(event) {
             var data = JSON.parse(event.data);
             var messages = document.getElementById("messages");
             messages.value += data.username + ": " + data.message + "\n";
         };
+
         function sendMessage() {
             var message = document.getElementById("message").value;
+            var username = document.getElementById("username").value;
             socket.send(JSON.stringify({username: username, message: message}));
             document.getElementById("message").value = "";
         }
