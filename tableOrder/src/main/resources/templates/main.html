@@ -22,10 +22,10 @@
           <div class="col-md-6 offset-md-3">
             <div class="card">
               <div class="card-header bg-primary text-white">
-              <th:block th:if="${session.tableNumber != null}">
-                <h3 class="card-title" style="text-align: center; margin: 10px;" th:text="|[ ${session.tableNumber} ] 번 테이블|"></h3>
+              <th:block th:if="${tableNumber != null}">
+                <h3 class="card-title" style="text-align: center; margin: 10px;" th:text="|[ ${tableNumber} ] 번 테이블|"></h3>
               </th:block>
-              <th:block th:if="${session.tableNumber == null}">
+              <th:block th:if="${tableNumber == null}">
                 <h3 class="card-title" style="text-align: center; margin: 10px;">테이블 번호가 없습니다</h3>
               </th:block>
               </div>
@@ -100,7 +100,7 @@
 
       <script th:inline="javascript">
       	var socket = new WebSocket("ws://" + location.host + "/chat");
-      	var tableNumber = [[${session.tableNumber}]];
+      	var tableNumber = [[${tableNumber}]];
 
       	let today = new Date();
 	    // 년도 getFullYear()
@@ -113,7 +113,7 @@
 	    let hours = today.getHours();
 	    // 분
 	    let minutes = today.getMinutes();
-	    var tableDate = year +"년 " + month +"월 " + date + "일 " + hours + "시 " + minutes + "분";
+	    var tableDate = "[" + year + "-" + month + "-" + date + "] " + hours + "시" + minutes + "분";
 
       	function goOrder() {
       		location.href="/order";
@@ -160,12 +160,12 @@
       	function tableNumberConfig() {
       		var tableNumber = document.getElementById("tableNumber").value;
       		$.ajax({
-      			url: "/tableNumberConfig.do",
-      			type: "POST",
+      			url: "/",
+      			type: "GET",
       			data: {tableNumber : tableNumber},
       			success: function(){
 					alert("테이블 번호가 [ " + tableNumber + " ] 로 설정되었습니다.")
-					location.reload();
+					location.href="/?tableNumber=" + tableNumber;
       			},
       			error: function(){
 					alert("실패");
