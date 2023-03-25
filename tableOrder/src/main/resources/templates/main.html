@@ -63,6 +63,7 @@
 	              <button type="button" onclick="javascript:sendMessage(1);" class="btn btn-outline-primary btn-lg" style="border-radius: 0px;">식기도구 주세요</button>
 	              <button type="button" onclick="javascript:sendMessage(2);" class="btn btn-outline-primary btn-lg" style="border-radius: 0px;">물좀 주세요</button>
 	              <button type="button" onclick="javascript:sendMessage(3);" class="btn btn-outline-primary btn-lg" style="border-radius: 0px;">휴지좀 주세요</button>
+	              <br>
 	              <button type="button" onclick="javascript:sendMessage(4);" class="btn btn-outline-primary btn-lg" style="border-radius: 0px;">기타</button>
 	              <input type="text" class="fomr-controller" placeholder="기타 문의사항을 적어주세요" id="question" name="question">
               </div>
@@ -87,6 +88,7 @@
             <div class="modal-body">
 	            <div class="d-grid gap-2" style="margin-top: 22px; margin-bottom: 22px; margin-left: 11px; margin-right: 11px;">
 	            	<span>테이블 번호 설정</span>
+	            	<p style="font-size: 60%; margin-bottom: 0px;">* 테이블 번호는 숫자만 가능합니다</p>
 	            	<input type="number" id="tableNumber" name="tableNumber">
 	            	<button type="button" onclick="javascript:tableNumberConfig();" class="btn btn-primary" data-bs-dismiss="modal">설정하기</button>
 	            </div>
@@ -135,13 +137,13 @@
 		      			case 2 :
 		      	            var message = "[물 요청]";
 		      	            socket.send(JSON.stringify({tableDate: tableDate, tableNumber: tableNumber, message: message}));
-		      	          alert("직원을 호출했습니다. 잠시만 기다려주세요");
+		      	          	alert("직원을 호출했습니다. 잠시만 기다려주세요");
 		      			break;
 
 		      			case 3 :
 		      	            var message = "[휴지 요청]";
 		      	            socket.send(JSON.stringify({tableDate: tableDate, tableNumber: tableNumber, message: message}));
-		      	          alert("직원을 호출했습니다. 잠시만 기다려주세요");
+		      	          	alert("직원을 호출했습니다. 잠시만 기다려주세요");
 		      			break;
 
 		      			case 4 :
