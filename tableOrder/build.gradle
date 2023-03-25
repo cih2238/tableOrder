@@ -22,6 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -29,6 +30,9 @@ dependencies {
 	runtimeOnly 'com.mysql:mysql-connector-j'
 
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
+	implementation 'commons-io:commons-io:2.6'
+	implementation 'commons-fileupload:commons-fileupload:1.4'
 }
 
 tasks.named('test') {
